@@ -1,3 +1,7 @@
+# CNN to recognize cars vs planes vs boats based on data from https://drive.google.com/open?id=1dbcWabr3Xrr4JvuG0VxTiweGzHn-YYvW
+# and boats from google images
+# data set has 600 training images (200 of planes, 200 of boats and 200 of cars) and 100 testing images (50 of planes, 50 of cars, 50 of boats)
+
 import tensorflow as tf 
 import keras
 from keras.preprocessing.image import ImageDataGenerator 
@@ -5,17 +9,14 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-# CNN to recognize cars vs planes based on data from https://drive.google.com/open?id=1dbcWabr3Xrr4JvuG0VxTiweGzHn-YYvW
-# data set has 400 training images (200 of planes and 200 of cars) and 100 testing images (50 of planes, 50 of cars)
-
 #data paths
 train_data = 'v_data/train'
 val_data = 'v_data/test'
 
-train_samples = 400
-val_samples = 100
+train_samples = 600
+val_samples = 150
 epochs = 20
-batch_size = 32
+batch_size = 64
 
 img_width = 224 
 img_height = 224
@@ -60,7 +61,7 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.Dropout(0.5),
     tf.keras.layers.Flatten(),
     tf.keras.layers.Dense(512, activation='relu'),
-    tf.keras.layers.Dense(2, activation='softmax')
+    tf.keras.layers.Dense(3, activation='softmax')
 ])
 
 model.compile(optimizer = 'adam',
